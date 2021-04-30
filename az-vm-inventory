@@ -167,7 +167,7 @@
     {
       "name": "[parameters('omsLogAnalyticsWorkspaceName')]",
       "type": "Microsoft.OperationalInsights/workspaces",
-      "apiVersion": "2015-11-01-preview",
+      "apiVersion": "2018-04-16",
       "location": "[parameters('omsLogAnalyticsRegion')]",
       "properties": {
         "sku": {
@@ -176,7 +176,7 @@
       },
       "resources": [
         {
-          "apiVersion": "2015-11-01-preview",
+          "apiVersion": "2018-04-16",
           "name": "[variables('omsSolutions').customSolution.name]",
           "type": "views",
           "id": "[resourceId('Microsoft.OperationalInsights/workspaces/views/', parameters('omsLogAnalyticsWorkspaceName'), variables('omsSolutions').customSolution.name)]",
@@ -1130,7 +1130,7 @@
       ]
     },
     {
-      "apiVersion": "2015-10-31",
+      "apiVersion": "2018-04-16",
       "location": "[parameters('omsAutomationRegion')]",
       "name": "[parameters('omsAutomationAccountName')]",
       "type": "Microsoft.Automation/automationAccounts",
@@ -1143,7 +1143,7 @@
         {
           "name": "[variables('opsInsightWorkspaceID')]",
           "type": "variables",
-          "apiVersion": "2015-10-31",
+          "apiVersion": "2018-04-16",
           "dependsOn": [
             "[concat('Microsoft.Automation/automationAccounts/', parameters('omsAutomationAccountName'))]"
           ],
@@ -1158,7 +1158,7 @@
         {
           "name": "[variables('opsInsightWorkspaceKey') ]",
           "type": "variables",
-          "apiVersion": "2015-10-31",
+          "apiVersion": "2018-04-16",
           "dependsOn": [
             "[concat('Microsoft.Automation/automationAccounts/', parameters('omsAutomationAccountName'))]"
           ],
@@ -1173,7 +1173,7 @@
         {
           "name": "[variables('createScheduleAutomationAccountName')]",
           "type": "variables",
-          "apiVersion": "2015-10-31",
+          "apiVersion": "2018-04-16",
           "dependsOn": [
             "[concat('Microsoft.Automation/automationAccounts/', parameters('omsAutomationAccountName'))]"
           ],
@@ -1188,7 +1188,7 @@
         {
           "name": "[variables('createScheduleResourceGroupName')]",
           "type": "variables",
-          "apiVersion": "2015-10-31",
+          "apiVersion": "2018-04-16",
           "dependsOn": [
             "[concat('Microsoft.Automation/automationAccounts/', parameters('omsAutomationAccountName'))]"
           ],
@@ -1203,7 +1203,7 @@
         {
           "name": "[variables('runbooks').ingestParentRunbook.name]",
           "type": "runbooks",
-          "apiVersion": "2015-10-31",
+          "apiVersion": "2018-04-16",
           "location": "[parameters('omsAutomationRegion')]",
           "dependsOn": [
             "[concat('Microsoft.Automation/automationAccounts/', parameters('omsAutomationAccountName'))]",
@@ -1225,7 +1225,7 @@
         {
           "name": "[variables('runbooks').ingestSchedulerRunbook.name]",
           "type": "runbooks",
-          "apiVersion": "2015-10-31",
+          "apiVersion": "2018-04-16",
           "location": "[parameters('omsAutomationRegion')]",
           "dependsOn": [
             "[concat('Microsoft.Automation/automationAccounts/', parameters('omsAutomationAccountName'))]",
@@ -1247,7 +1247,7 @@
         {
           "name": "[concat(parameters('omsAutomationAccountName'), '/', variables('ingestscheduleName'),'-',parameters('ingestSchedulerGuid'))]",
           "type": "microsoft.automation/automationAccounts/schedules",
-          "apiVersion": "2015-10-31",
+          "apiVersion": "2018-04-16",
           "location": "[parameters('omsAutomationRegion')]",
           "dependsOn": [
             "[concat('Microsoft.Automation/automationAccounts/', parameters('omsAutomationAccountName'))]",
@@ -1265,7 +1265,7 @@
         {
           "name": "[concat(parameters('omsAutomationAccountName'), '/', parameters('ingestSchedulerGuid'))]",
           "type": "microsoft.automation/automationAccounts/jobSchedules",
-          "apiVersion": "2015-10-31",
+          "apiVersion": "2018-04-16",
           "location": "[parameters('omsAutomationRegion')]",
           "dependsOn": [
             "[concat('Microsoft.Automation/automationAccounts/', parameters('omsAutomationAccountName'), '/schedules/', variables('ingestscheduleName'),'-',parameters('ingestSchedulerGuid'))]",
@@ -1285,7 +1285,7 @@
         {
           "name": "[concat(parameters('omsAutomationAccountName'), '/', parameters('ingestSchedulerGuid'))]",
           "type": "Microsoft.Automation/automationAccounts/jobs",
-          "apiVersion": "2015-10-31",
+          "apiVersion": "2018-04-16",
           "location": "[parameters('omsAutomationRegion')]",
           "dependsOn": [
             "[concat('Microsoft.Automation/automationAccounts/', parameters('omsAutomationAccountName'))]",
@@ -1310,7 +1310,7 @@
     {
       "name": "[variables('omsSolutions').customSolution.solutionName]",
       "type": "Microsoft.OperationsManagement/solutions",
-      "apiVersion": "2015-11-01-preview",
+      "apiVersion": "2018-04-16",
       "location": "[parameters('omsLogAnalyticsRegion')]",
       "dependsOn": [
         "[concat('Microsoft.OperationalInsights/workspaces/', parameters('omsLogAnalyticsWorkspaceName'))]",
@@ -1336,7 +1336,7 @@
       }
     },
     {
-      "apiVersion": "2015-11-01-preview",
+      "apiVersion": "2018-04-16",
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "name": "[concat(parameters('omsLogAnalyticsWorkspaceName'), '/', tolower(variables('alertArray')[copyIndex()].searchCategory), '|', toLower(variables('alertArray')[copyIndex()].searchName))]",
       "copy": {
@@ -1355,7 +1355,7 @@
       }
     },
     {
-      "apiVersion": "2015-11-01-preview",
+      "apiVersion": "2018-04-16",
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches/schedules",
       "name": "[concat(parameters('omsLogAnalyticsWorkspaceName'), '/', tolower(variables('alertArray')[copyIndex()].searchCategory), '|', toLower(variables('alertArray')[copyIndex()].searchName), '/','schedule-',uniqueString(resourceGroup().id, deployment().name,parameters('omsLogAnalyticsWorkspaceName'), '/', variables('alertArray')[copyIndex()].searchCategory, '|', variables('alertArray')[copyIndex()].searchName))]",
       "copy": {
@@ -1375,7 +1375,7 @@
       }
     },
     {
-      "apiVersion": "2015-11-01-preview",
+      "apiVersion": "2018-04-16",
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches/schedules/actions",
       "name": "[concat(parameters('omsLogAnalyticsWorkspaceName'), '/', tolower(variables('alertArray')[copyIndex()].searchCategory), '|', toLower(variables('alertArray')[copyIndex()].searchName), '/','schedule-',uniqueString(resourceGroup().id, deployment().name,parameters('omsLogAnalyticsWorkspaceName'), '/', variables('alertArray')[copyIndex()].searchCategory, '|', variables('alertArray')[copyIndex()].searchName), '/', 'alert-',uniqueString(resourceGroup().id, deployment().name,parameters('omsLogAnalyticsWorkspaceName'), '/', variables('alertArray')[copyIndex()].searchCategory, '|', variables('alertArray')[copyIndex()].searchName))]",
       "copy": {
